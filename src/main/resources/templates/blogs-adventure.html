@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${page}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+            .btn-group {
+            display: flex;
+            gap: 10px; /* Отступ между кнопками */
+            justify-content: center; /* Выравнивание по центру */
+        }
+            .btn {
+            flex: 1; /* Чтобы кнопки занимали одинаковое пространство */
+            max-width: 200px; /* Максимальная ширина кнопок */
+        }
+
+    </style>
+</head>
+<body>
+<header th:insert="base/header :: header"></header>
+
+<div class="blog-blocks p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 text-body-emphasis">Список всех путешествий</h1>
+    <div class="btn-group">
+        <a href="/blog/add/adventure" class="btn btn-primary btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg>
+            Добавить путешествие
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div th:each="el : ${adventures}" class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/some.jpg" alt="Картинка" width="250" height="250">
+                <h3 th:text="${el.city}"></h3>
+                <p><strong>Стоимость путешествия:</strong> <span th:text="${el.price} + ' руб.'"></span></p>
+                <p><strong>Места культурного наследия:</strong> <span th:text="${el.culturePlace}"></span></p>
+                <p><strong>Места для посещения:</strong> <span th:text="${el.visitPlace}"></span></p>
+                <p><strong>Рейтинг:</strong> <span th:text="${el.rating} + ' из 10'"></span></p>
+                <a th:href="'/blog/' + ${el.id} + '/adventure'" class="btn btn-primary btn-sm">
+                    Редактировать
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
+                         class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                </a><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/moscow.jpg" alt="Картинка" width="250" height="250">
+                <h3>Москва</h3>
+                <p>Москва — популярный туристический центр. Московский Кремль, Красная площадь, Новодевичий монастырь и Церковь Вознесения в Коломенском входят в список объектов всемирного наследия ЮНЕСКО.</p>
+                <p><strong>Стоимость путешествия: 50.000</strong></p>
+                <p><strong>Места культурного наследия: Красная площадь, Старый Арбат, ВДНХ, Останкинская телебашня</strong></p>
+                <p><strong>Места для посещения: Красная площадь, Старый Арбат</strong></p>
+                <p><strong>Рейтинг: 10 из 10</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/sankt-peterburg.jpg" alt="Картинка" width="250" height="250">
+                <h3>Санкт-Петербург</h3>
+                <p>В Санкт-Петербурге располагается большое количество памятников истории и культуры. Более 70 театров, в том числе всемирно известные: Мариинский, Александринский и Михайловский театры. В городе работают свыше 200 музеев и их филиалов.</p>
+                <p><strong>Стоимость путешествия: 45.000</strong></p>
+                <p><strong>Места культурного наследия: Дворцовая Площадь, Невский проспект, Зимний Дворец, Набережные Невы</strong></p>
+                <p><strong>Места для посещения: Невский проспект, Зимний Дворец</strong></p>
+                <p><strong>Рейтинг: 10 из 10</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/sochi.jpg" alt="Картинка" width="250" height="250">
+                <h3>Сочи</h3>
+                <p>Сочи — крупнейший и единственный в России субтропический курорт.В летний курортный сезон в городе работает около двух с половиной тысяч средств размещения, в том числе 60 санаториев и пансионатов. Зимой к услугам туристов Сочи предлагает горнолыжные курорты Красной Поляны.</p>
+                <p><strong>Стоимость путешествия: 40.000</strong></p>
+                <p><strong>Места культурного наследия: Красная Поляна, Улица Навагинская, Свято-Троицкий храм, Государственный Цирк</strong></p>
+                <p><strong>Места для посещения: Красная Поляна, Свято-Троицкий храм</strong></p>
+                <p><strong>Рейтинг: 10 из 10</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/kazan.jpg" alt="Картинка" width="250" height="250">
+                <h3>Казань</h3>
+                <p>Казань — одно из самых красивых и интересных мест России, город с великолепным историческим и культурным наследием. Самой известной достопримечательностью столицы Татарстана является кремль, который включён в список объектов Всемирного наследия ЮНЕСКО.</p>
+                <p><strong>Стоимость путешествия: 40.000</strong></p>
+                <p><strong>Места культурного наследия: Казанский Арбат, Татаватар, "Казан", Кремлевская набережная</strong></p>
+                <p><strong>Места для посещения: Казанский Арбат, Кремлевская набережная</strong></p>
+                <p><strong>Рейтинг: 10 из 10</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 d-flex flex-column align-items-center">
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-3 bg-body-tertiary border rounded-3 d-flex flex-column align-items-center">
+                <img src="/images/yaroslavl.jpg" alt="Картинка" width="250" height="250">
+                <h3>Ярославль</h3>
+                <p>Ярославль является одним из ведущих звеньев «Золотого Кольца» — всемирно известного туристического маршрута России. Сегодня город представляет собой музей под открытым небом, в котором находятся около 800 охраняемых государством памятников архитектуры.</p>
+                <p><strong>Стоимость путешествия: 35.000</strong></p>
+                <p><strong>Места культурного наследия: Волжская набережная, Мемориал Победы, Набережная Мышкина, Дом художников</strong></p>
+                <p><strong>Места для посещения: Волжская набережная, Дом художников</strong></p>
+                <p><strong>Рейтинг: 10 из 10</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="py-2 text-center text-body-secondary">
+    <div th:insert="base/footer :: footer"></div>
+</footer>
+</body>
+</html>
